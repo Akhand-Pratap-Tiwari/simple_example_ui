@@ -2,6 +2,14 @@
 
 A new Flutter project.
 
+## Here is the example video of compiled app running on Android :
+
+
+
+https://user-images.githubusercontent.com/97452909/207046698-0a37ed57-3054-40a6-85a3-1d8871c7a952.mp4
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
