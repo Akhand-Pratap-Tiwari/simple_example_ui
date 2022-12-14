@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
+        //To prevent Infinite Bounds to the Child
         height: (MediaQuery.of(context).orientation == Orientation.landscape)
             ? MediaQuery.of(context).size.height * 1.5
             : MediaQuery.of(context).size.height,
