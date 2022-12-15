@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {
         overscroll.disallowIndicator();
-        return false;
+        return true;
       },
       child: SingleChildScrollView(
         child: SizedBox(
