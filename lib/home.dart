@@ -35,81 +35,88 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        //To prevent Infinite Bounds to the Child
-        height: (MediaQuery.of(context).orientation == Orientation.landscape)
-            ? MediaQuery.of(context).size.height * 1.5
-            : MediaQuery.of(context).size.height,
-        child: Scaffold(
-          backgroundColor: Colors.indigo,
-          floatingActionButton: FloatingActionButton(
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
+        overscroll.disallowIndicator();
+        return false;
+      },
+      child: SingleChildScrollView(
+        child: SizedBox(
+          //To prevent Infinite Bounds to the Child
+          height: (MediaQuery.of(context).orientation == Orientation.landscape)
+              ? MediaQuery.of(context).size.height * 1.5
+              : MediaQuery.of(context).size.height,
+          child: Scaffold(
             backgroundColor: Colors.indigo,
-            onPressed: _incrementText,
-            child: const Icon(
-              Icons.arrow_circle_right_rounded,
-              size: 50,
-              color: Colors.white,
-            ),
-          ),
-          body: Column(
-            children: [
-              Expanded(
-                child: AnimatedSwitcher(
-                  switchInCurve: Curves.easeIn,
-                  switchOutCurve: Curves.easeOut,
-                  duration: const Duration(milliseconds: 500),
-                  child: myWidget,
-                ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.indigo,
+              onPressed: _incrementText,
+              child: const Icon(
+                Icons.arrow_circle_right_rounded,
+                size: 50,
+                color: Colors.white,
               ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(50),
+            ),
+            body: Column(
+              children: [
+                Expanded(
+                  child: AnimatedSwitcher(
+                    switchInCurve: Curves.easeIn,
+                    switchOutCurve: Curves.easeOut,
+                    duration: const Duration(milliseconds: 500),
+                    child: myWidget,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(50),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25, bottom: 20),
+                          child: SmoothPageIndicator(
+                            controller: pageController,
+                            count: 3,
+                            effect: const JumpingDotEffect(
+                                verticalOffset: 10,
+                                dotColor: Colors.lightBlue,
+                                activeDotColor: Colors.indigoAccent),
+                          ),
+                        ),
+                        Expanded(
+                          child: PageView(
+                            onPageChanged: (value) => setState(() {
+                              imgNo = value;
+                              myWidget = ImgContainer(
+                                  key: ValueKey(value),
+                                  imgPath: imgPath[imgNo]);
+                            }),
+                            physics: const ClampingScrollPhysics(),
+                            controller: pageController,
+                            children: const [
+                              TextHolder(
+                                  heading: stringHeading_1,
+                                  bodyText: stringBody_1),
+                              TextHolder(
+                                  heading: stringHeading_2,
+                                  bodyText: stringBody_2),
+                              TextHolder(
+                                  heading: stringHeading_3,
+                                  bodyText: stringBody_3),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25, bottom: 20),
-                        child: SmoothPageIndicator(
-                          controller: pageController,
-                          count: 3,
-                          effect: const JumpingDotEffect(
-                              verticalOffset: 10,
-                              dotColor: Colors.lightBlue,
-                              activeDotColor: Colors.indigoAccent),
-                        ),
-                      ),
-                      Expanded(
-                        child: PageView(
-                          onPageChanged: (value) => setState(() {
-                            imgNo = value;
-                            myWidget = ImgContainer(
-                                key: ValueKey(value), imgPath: imgPath[imgNo]);
-                          }),
-                          physics: const ClampingScrollPhysics(),
-                          controller: pageController,
-                          children: const [
-                            TextHolder(
-                                heading: stringHeading_1,
-                                bodyText: stringBody_1),
-                            TextHolder(
-                                heading: stringHeading_2,
-                                bodyText: stringBody_2),
-                            TextHolder(
-                                heading: stringHeading_3,
-                                bodyText: stringBody_3),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
