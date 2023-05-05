@@ -1,6 +1,6 @@
 # example_figma_ui
 
-A new Flutter project.
+A simple built using Flutter. I made this for the recruitment process at GDSC. It implements various simple animations as well. [By the way I got selected 😉].
 
 ## Here is the example video of compiled app running on Android :
 
