@@ -18,6 +18,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, guidance on mobile development, and a full API reference.
 
 ## Steps to run:
+- Make sure flutter is installed properly along with platform SDKs.
 - Clone the repo.
 - Run `flutter pub get` in console.
 - Now run the app in debug or release mode as you wish by clicking on play button in vscode or running `flutter run` in console. 
